@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>User Profile</title>
+</head>
+<body>
+    <div th:replace="common/header :: header"></div>
+
+    <div class="container mt-5">
+        <h2>User Profile</h2>
+        <form th:action="@{/user/profile}" th:object="${user}" method="post">
+    <!-- Hidden field for userId -->
+    <input type="hidden" th:field="*{userId}" />
+
+    <!-- Field for name update -->
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" class="form-control" th:field="*{name}" required />
+    </div>
+
+    <!-- Field for mobile update -->
+    <div class="form-group">
+        <label for="mobile">Mobile:</label>
+        <input type="text" id="mobile" class="form-control" th:field="*{mobile}" required />
+    </div>
+
+    <!-- Field for email update -->
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" class="form-control" th:field="*{email}" required />
+    </div>
+
+    <!-- Gender selection dropdown -->
+    <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" class="form-control" th:field="*{gender}">
+            <option value="Male" th:selected="${user.gender == 'Male'}">Male</option>
+            <option value="Female" th:selected="${user.gender == 'Female'}">Female</option>
+            <option value="Other" th:selected="${user.gender == 'Other'}">Other</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>
+    </div>
+
+    <div th:replace="common/footer :: footer"></div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
